@@ -1,14 +1,24 @@
 import 'package:bismi_chicken/main.dart';
+import 'package:bismi_chicken/view_model.dart/dashboard_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class DashBoard extends StatelessWidget {
-  const DashBoard({super.key});
+class DashBoard extends StatefulWidget {
+  DashBoard({super.key});
 
+  @override
+  State<DashBoard> createState() => _DashBoardState();
+}
+
+class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    final provider = Provider.of<DashProvider>(context, listen: false);
+    provider.loadColors();
+    print(provider.colors);
     return Expanded(
       child: Container(
         color: Colors.grey.shade50,
@@ -23,39 +33,59 @@ class DashBoard extends StatelessWidget {
                     sizedBox(height * 0.08, width),
                     Text('Recent Activity', style: largeTextStyle),
                     sizedBox(height * 0.03, 0.0),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Wrap(
-                          spacing: width * 0.028, // Horizontal space between boxes
-                          runSpacing: height * 0.02, // Vertical space between rows
-                          children: [1, 2, 3, 4].map(
-                            (farm) {
-                              return Card(
-                                elevation: 1,
-                                child: CustomContainer(
-                                  width: width * 0.17, // Set the width to 16% of the screen width
-                                  height: height * 0.37, // Adjust height as needed
-                                  color: Colors.white,
-                                  padding: EdgeInsets.all(15.0),
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(height: height * 0.01), // Add some top spacing
-                                      Text(
-                                        'Farm $farm', // Dynamic farm name
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text('')
-                                    ],
+                    SizedBox(
+                      height: height * 0.42,
+                      child: ListView.builder(
+                        padding: EdgeInsets.all(0),
+                        itemCount: provider.farms.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.only(left: width * 0.01),
+                            child: CustomContainer(
+                              width: width * 0.17,
+                              height: height * 0.40,
+                              color: Colors.white,
+                              padding: const EdgeInsets.all(15.0),
+                              borderRadius: BorderRadius.circular(15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: height * 0.01),
+                                  Text(
+                                    'Farm $index',
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          ).toList()),
+                                  SizedBox(height: height * 0.06),
+                                  Center(
+                                    child: SizedBox(
+                                      height: height * 0.15,
+                                      width: width * 0.082,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: width * 0.01,
+                                        backgroundColor: Colors.grey.shade100,
+                                        valueColor: AlwaysStoppedAnimation<Color>(provider.colors[index]),
+                                        value: 400 / 500,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: height * 0.06),
+                                  Center(
+                                    child: Text(
+                                      '80 / 100 Chicken',
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     sizedBox(height * 0.03, 0.0),
                     Row(
@@ -103,7 +133,7 @@ class DashBoard extends StatelessWidget {
                                 ),
                               ),
                               sizedBox(height * 0.01, 0.0),
-                              ///////////////////////////// Revenue //////////////////////////////////////////
+                              ///////////////////////////// Expanse //////////////////////////////////////////
                               Card(
                                 elevation: 1,
                                 child: CustomContainer(

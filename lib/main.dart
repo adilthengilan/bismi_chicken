@@ -1,4 +1,5 @@
 import 'package:bismi_chicken/dashboard.dart';
+import 'package:bismi_chicken/view_model.dart/dashboard_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -13,36 +14,37 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => DashProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: HomePage(),
       ),
-      home: HomePage(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
+class HomePage extends StatelessWidget {
+  final List<Widget> pages = [
     DashBoard(),
-    Import(),
-    Feed(),
-    Export(),
+    const Import(),
+    const Feed(),
+    const Export(),
   ];
+
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    final provider = Provider.of<DashProvider>(context, listen: false);
     return Scaffold(
       body: Row(
         children: [
@@ -77,8 +79,11 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(bottom: height * 0.005),
-                          child: Consumer<DashBoard>(
-                            builder: (context, person, child) => CustomContainer(
+                          child: InkWell(
+                            onTap: () {
+                              provider.setNavigationIndex(index);
+                            },
+                            child: CustomContainer(
                               height: 50,
                               width: width,
                               color: Colors.blue.shade50,
@@ -119,7 +124,9 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          const DashBoard(),
+          Consumer<DashProvider>(
+            builder: (context, person, child) => pages[person.navigationindex],
+          ),
         ],
       ),
     );
