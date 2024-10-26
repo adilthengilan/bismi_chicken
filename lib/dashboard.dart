@@ -26,7 +26,8 @@ class _DashBoardState extends State<DashBoard> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 0.03, vertical: height * 0.02),
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.03, vertical: height * 0.02),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -68,7 +69,9 @@ class _DashBoardState extends State<DashBoard> {
                                       child: CircularProgressIndicator(
                                         strokeWidth: width * 0.01,
                                         backgroundColor: Colors.grey.shade100,
-                                        valueColor: AlwaysStoppedAnimation<Color>(provider.colors[index]),
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                provider.colors[index]),
                                         value: 400 / 500,
                                       ),
                                     ),
@@ -77,7 +80,9 @@ class _DashBoardState extends State<DashBoard> {
                                   Center(
                                     child: Text(
                                       '80 / 100 Chicken',
-                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
@@ -103,8 +108,10 @@ class _DashBoardState extends State<DashBoard> {
                               children: [
                                 sizedBox(height * 0.025, 0.0),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: width * 0.015),
-                                  child: Text('Account System', style: mediumTextStyleBold),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 0.015),
+                                  child: Text('Account System',
+                                      style: mediumTextStyleBold),
                                 ),
                                 sizedBox(height * 0.01, 0.0),
                                 divider,
@@ -122,12 +129,15 @@ class _DashBoardState extends State<DashBoard> {
                                 child: CustomContainer(
                                   height: height * 0.2,
                                   width: width,
-                                  padding: EdgeInsets.symmetric(horizontal: width * 0.015, vertical: height * 0.02),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 0.015,
+                                      vertical: height * 0.02),
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15),
                                   child: Column(
                                     children: [
-                                      Text('Revenue', style: mediumTextStyleBold),
+                                      Text('Revenue',
+                                          style: mediumTextStyleBold),
                                     ],
                                   ),
                                 ),
@@ -139,12 +149,15 @@ class _DashBoardState extends State<DashBoard> {
                                 child: CustomContainer(
                                   height: height * 0.2,
                                   width: width,
-                                  padding: EdgeInsets.symmetric(horizontal: width * 0.015, vertical: height * 0.02),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 0.015,
+                                      vertical: height * 0.02),
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15),
                                   child: Column(
                                     children: [
-                                      Text('Expanse', style: mediumTextStyleBold),
+                                      Text('Expanse',
+                                          style: mediumTextStyleBold),
                                     ],
                                   ),
                                 ),
@@ -156,12 +169,15 @@ class _DashBoardState extends State<DashBoard> {
                                 child: CustomContainer(
                                   height: height * 0.2,
                                   width: width,
-                                  padding: EdgeInsets.symmetric(horizontal: width * 0.015, vertical: height * 0.02),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 0.015,
+                                      vertical: height * 0.02),
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15),
                                   child: Column(
                                     children: [
-                                      Text('Profit', style: mediumTextStyleBold),
+                                      Text('Profit',
+                                          style: mediumTextStyleBold),
                                     ],
                                   ),
                                 ),
@@ -185,68 +201,13 @@ class _DashBoardState extends State<DashBoard> {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Import extends StatelessWidget {
-  const Import({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return Expanded(
-      child: CustomContainer(
-        height: height,
-        width: width,
-        color: Colors.grey.shade50,
-        child: Column(
-          children: [],
-        ),
-      ),
-    );
-  }
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Feed extends StatelessWidget {
-  const Feed({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return Expanded(
-      child: CustomContainer(
-        height: height,
-        width: width,
-        color: Colors.grey.shade50,
-        child: Column(
-          children: [],
-        ),
-      ),
-    );
-  }
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Export extends StatelessWidget {
-  const Export({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return Expanded(
-      child: CustomContainer(
-        height: height,
-        width: width,
-        color: Colors.grey.shade50,
-        child: Column(
-          children: [],
-        ),
-      ),
-    );
-  }
-}

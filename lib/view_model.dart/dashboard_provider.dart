@@ -43,21 +43,25 @@ class DashProvider extends ChangeNotifier {
   Future<void> saveColors() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    List<String> colorStrings = colors.map((color) => color.value.toRadixString(16)).toList();
+    List<String> colorStrings =
+        colors.map((color) => color.value.toRadixString(16)).toList();
     print(colorStrings);
     await prefs.setStringList('colorkey', colorStrings);
     print(colorStrings);
   }
 
   Future<List<Color>> getColors(int count) async {
-    print('=========hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+    print(
+        '=========hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? colorStrings = prefs.getStringList('colorkey');
     print('${colorStrings}===================');
     // If colors are saved, convert them back to Color objects; else generate new colors
     if (colorStrings != null && colorStrings.isNotEmpty) {
-      return colorStrings.map((hex) => Color(int.parse(hex, radix: 16))).toList();
+      return colorStrings
+          .map((hex) => Color(int.parse(hex, radix: 16)))
+          .toList();
     } else {
       List<Color> newColors = generateRandomColors(count);
       colors = newColors;

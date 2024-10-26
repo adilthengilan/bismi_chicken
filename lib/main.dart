@@ -1,4 +1,7 @@
+import 'package:bismi_chicken/chicks_import.dart';
 import 'package:bismi_chicken/dashboard.dart';
+import 'package:bismi_chicken/export.dart';
+import 'package:bismi_chicken/feeding.dart';
 import 'package:bismi_chicken/view_model.dart/dashboard_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,7 +36,7 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   final List<Widget> pages = [
     DashBoard(),
-    const Import(),
+    const ChicksImport(),
     const Feed(),
     const Export(),
   ];
@@ -89,7 +92,8 @@ class HomePage extends StatelessWidget {
                               color: Colors.blue.shade50,
                               borderRadius: BorderRadius.circular(10),
                               child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: width * 0.01),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: width * 0.01),
                                 child: Row(
                                   children: [
                                     CircleAvatar(

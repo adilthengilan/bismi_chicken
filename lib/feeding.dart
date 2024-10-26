@@ -1,8 +1,8 @@
 import 'package:bismi_chicken/main.dart';
 import 'package:flutter/material.dart';
 
-class ChicksImport extends StatelessWidget {
-  const ChicksImport({super.key});
+class Feed extends StatelessWidget {
+  const Feed({super.key});
 
   @override
   Widget build(BuildContext context) {
