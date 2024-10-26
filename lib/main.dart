@@ -1,4 +1,7 @@
+import 'package:bismi_chicken/dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,24 +14,186 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Home(),
+      home: HomePage(),
     );
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    DashBoard(),
+    Import(),
+    Feed(),
+    Export(),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Column(
-        children: [],
+      body: Row(
+        children: [
+          CustomContainer(
+            width: width * 0.15,
+            height: height,
+            color: Colors.blue.shade50,
+            border: Border(right: BorderSide(color: Colors.grey.shade100)),
+            child: Column(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CustomContainer(
+                      height: height * 0.11,
+                      width: width,
+                      color: Colors.transparent,
+                      child: Center(
+                        child: Text(
+                          'Bismi Super Chicken',
+                          textAlign: TextAlign.center,
+                          style: largeTextStyle,
+                        ),
+                      ),
+                    ),
+                    const Divider(color: Colors.white),
+                    sizedBox(height * 0.03, width),
+                    ListView.builder(
+                      itemCount: 4,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.008),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: height * 0.005),
+                          child: Consumer<DashBoard>(
+                            builder: (context, person, child) => CustomContainer(
+                              height: 50,
+                              width: width,
+                              color: Colors.blue.shade50,
+                              borderRadius: BorderRadius.circular(10),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: width * 0.01),
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: height * 0.02,
+                                      backgroundColor: Colors.grey,
+                                      // backgroundImage: const AssetImage('assets/chicken-feed.png'),
+                                    ),
+                                    sizedBox(0.0, width * 0.01),
+                                    Text(
+                                      index == 0
+                                          ? "DashBoard"
+                                          : index == 1
+                                              ? "Import"
+                                              : index == 2
+                                                  ? "Feed"
+                                                  : "Export",
+                                      style: GoogleFonts.montserrat(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const DashBoard(),
+        ],
       ),
     );
   }
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+class CustomContainer extends StatelessWidget {
+  final double height;
+  final double width;
+  final Color color;
+  final BorderRadius? borderRadius;
+  final EdgeInsets? padding;
+  final EdgeInsets? margin;
+  final Widget child;
+  final Border? border; // Added border parameter
+
+  const CustomContainer({
+    Key? key,
+    required this.height,
+    required this.width,
+    required this.color,
+    this.borderRadius,
+    this.padding,
+    this.margin,
+    required this.child,
+    this.border, // Include the border parameter
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      width: width,
+      padding: padding,
+      margin: margin,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: borderRadius,
+        border: border, // Apply the border to BoxDecoration
+      ),
+      child: child,
+    );
+  }
+}
+
+final TextStyle largeTextStyle = GoogleFonts.montserrat(
+  fontSize: 22,
+  fontWeight: FontWeight.bold,
+);
+
+final TextStyle mediumTextStyle = GoogleFonts.montserrat(
+  fontSize: 18,
+  fontWeight: FontWeight.w500,
+);
+
+final TextStyle mediumTextStyleBold = GoogleFonts.montserrat(
+  fontSize: 18,
+  fontWeight: FontWeight.w600,
+);
+
+final TextStyle smallTextStyle = GoogleFonts.montserrat(
+  fontSize: 14,
+  fontWeight: FontWeight.normal,
+);
+
+Widget sizedBox(height, width) {
+  return SizedBox(
+    height: height,
+    width: width,
+  );
+}
+
+final divider = Divider(color: Colors.grey.shade300);
