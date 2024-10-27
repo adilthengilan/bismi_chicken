@@ -18,7 +18,6 @@ class _DashBoardState extends State<DashBoard> {
     double width = MediaQuery.of(context).size.width;
     final provider = Provider.of<DashProvider>(context, listen: false);
     provider.loadColors();
-    print(provider.colors);
     return Expanded(
       child: Container(
         color: Colors.grey.shade50,
@@ -93,21 +92,64 @@ class _DashBoardState extends State<DashBoard> {
                       children: [
                         Card(
                           elevation: 1,
-                          child: CustomContainer(
-                            height: height * 0.6,
+                          child: Container(
                             width: width * 0.6,
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                sizedBox(height * 0.025, 0.0),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: width * 0.015),
-                                  child: Text('Account System', style: mediumTextStyleBold),
+                                // sizedBox(height * 0.025, 0.0),
+                                // Padding(
+                                //   padding: EdgeInsets.symmetric(horizontal: width * 0.015),
+                                //   child: Text('System', style: mediumTextStyleBold),
+                                // ),
+                                // sizedBox(height * 0.01, 0.0),
+                                // divider,
+                                Container(
+                                  width: width,
+                                  color: Colors.transparent,
+                                  child: Row(
+                                    children: [
+                                      AccountSystemCard(
+                                        heading: 'Import',
+                                        firstBar: 'Today Imported',
+                                        firstBarValue: 70,
+                                        secondBar: 'Today Batch Count',
+                                        secondBarValue: 35,
+                                        thirdBar: 'Dead Chicks',
+                                        thirdBarValue: 60,
+                                        fourthBar: 'Ready for Sale',
+                                        fourthBarValue: 80,
+                                      ),
+                                      AccountSystemCard(
+                                        heading: 'Feed',
+                                        firstBar: 'Today Imported',
+                                        firstBarValue: 20,
+                                        secondBar: 'Today Batch Count',
+                                        secondBarValue: 15,
+                                        thirdBar: 'Dead Chicks',
+                                        thirdBarValue: 60,
+                                        fourthBar: 'Ready for Sale',
+                                        fourthBarValue: 30,
+                                      ),
+                                      AccountSystemCard(
+                                        heading: 'Export',
+                                        firstBar: 'Today Imported',
+                                        firstBarValue: 50,
+                                        secondBar: 'Today Batch Count',
+                                        secondBarValue: 45,
+                                        thirdBar: 'Dead Chicks',
+                                        thirdBarValue: 20,
+                                        fourthBar: 'Ready for Sale',
+                                        fourthBarValue: 10,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                sizedBox(height * 0.01, 0.0),
-                                divider,
                               ],
                             ),
                           ),
@@ -123,11 +165,31 @@ class _DashBoardState extends State<DashBoard> {
                                   height: height * 0.2,
                                   width: width,
                                   padding: EdgeInsets.symmetric(horizontal: width * 0.015, vertical: height * 0.02),
-                                  color: Colors.white,
+                                  color: Colors.deepPurpleAccent.shade100,
                                   borderRadius: BorderRadius.circular(15),
                                   child: Column(
                                     children: [
-                                      Text('Revenue', style: mediumTextStyleBold),
+                                      sizedBox(height * 0.02, width),
+                                      Text(
+                                        'Revenue',
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.deepPurpleAccent.shade700,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Text(
+                                        '183.806K',
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 28,
+                                          color: Color.fromARGB(255, 243, 223, 255),
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                      sizedBox(height * 0.028, 0.0),
                                     ],
                                   ),
                                 ),
@@ -140,11 +202,31 @@ class _DashBoardState extends State<DashBoard> {
                                   height: height * 0.2,
                                   width: width,
                                   padding: EdgeInsets.symmetric(horizontal: width * 0.015, vertical: height * 0.02),
-                                  color: Colors.white,
+                                  color: Colors.purpleAccent.shade100,
                                   borderRadius: BorderRadius.circular(15),
                                   child: Column(
                                     children: [
-                                      Text('Expanse', style: mediumTextStyleBold),
+                                      sizedBox(height * 0.02, width),
+                                      Text(
+                                        'Expanse',
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.purple.shade700,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Text(
+                                        '10.203K',
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 28,
+                                          color: Color.fromARGB(255, 254, 223, 255),
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                      sizedBox(height * 0.028, 0.0),
                                     ],
                                   ),
                                 ),
@@ -157,11 +239,31 @@ class _DashBoardState extends State<DashBoard> {
                                   height: height * 0.2,
                                   width: width,
                                   padding: EdgeInsets.symmetric(horizontal: width * 0.015, vertical: height * 0.02),
-                                  color: Colors.white,
+                                  color: Colors.lightBlueAccent.shade100,
                                   borderRadius: BorderRadius.circular(15),
                                   child: Column(
                                     children: [
-                                      Text('Profit', style: mediumTextStyleBold),
+                                      sizedBox(height * 0.02, width),
+                                      Text(
+                                        'Profit',
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.lightBlueAccent.shade700,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Text(
+                                        '88.403K',
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 28,
+                                          color: Color.fromARGB(255, 223, 255, 255),
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                      sizedBox(height * 0.028, 0.0),
                                     ],
                                   ),
                                 ),
@@ -182,69 +284,111 @@ class _DashBoardState extends State<DashBoard> {
   }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Import extends StatelessWidget {
-  const Import({super.key});
+class AccountSystemCard extends StatelessWidget {
+  final String heading;
+  final String firstBar;
+  final double firstBarValue;
+  final String secondBar;
+  final double secondBarValue;
+  final String thirdBar;
+  final double thirdBarValue;
+  final String fourthBar;
+  final double fourthBarValue;
+  const AccountSystemCard({
+    super.key,
+    required this.heading,
+    required this.firstBar,
+    required this.firstBarValue,
+    required this.secondBar,
+    required this.secondBarValue,
+    required this.thirdBar,
+    required this.thirdBarValue,
+    required this.fourthBar,
+    required this.fourthBarValue,
+  });
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Expanded(
-      child: CustomContainer(
-        height: height,
-        width: width,
-        color: Colors.grey.shade50,
+      child: Container(
+        padding: EdgeInsets.all(15),
         child: Column(
-          children: [],
-        ),
-      ),
-    );
-  }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Feed extends StatelessWidget {
-  const Feed({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return Expanded(
-      child: CustomContainer(
-        height: height,
-        width: width,
-        color: Colors.grey.shade50,
-        child: Column(
-          children: [],
-        ),
-      ),
-    );
-  }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Export extends StatelessWidget {
-  const Export({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return Expanded(
-      child: CustomContainer(
-        height: height,
-        width: width,
-        color: Colors.grey.shade50,
-        child: Column(
-          children: [],
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(heading, style: mediumTextStyleBold),
+            divider,
+            sizedBox(height * 0.02, width),
+            Text(firstBar, style: smallTextStyleBold),
+            Row(
+              children: [
+                SizedBox(
+                  width: width * 0.137,
+                  height: 8,
+                  child: LinearProgressIndicator(
+                    value: firstBarValue / 100,
+                    color: Colors.grey.shade100,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
+                ),
+                sizedBox(0.0, width * 0.005),
+                Text('$firstBarValue', style: smallTextStyleBold),
+              ],
+            ),
+            sizedBox(height * 0.02, width),
+            Text(secondBar, style: smallTextStyleBold),
+            Row(
+              children: [
+                SizedBox(
+                  width: width * 0.137,
+                  height: 8,
+                  child: LinearProgressIndicator(
+                    value: secondBarValue / 100,
+                    color: Colors.grey.shade100,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.yellowAccent),
+                  ),
+                ),
+                sizedBox(0.0, width * 0.005),
+                Text('$secondBarValue', style: smallTextStyleBold),
+              ],
+            ),
+            sizedBox(height * 0.02, width),
+            Text(thirdBar, style: smallTextStyleBold),
+            Row(
+              children: [
+                SizedBox(
+                  width: width * 0.137,
+                  height: 8,
+                  child: LinearProgressIndicator(
+                    value: thirdBarValue / 100,
+                    color: Colors.grey.shade100,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+                  ),
+                ),
+                sizedBox(0.0, width * 0.005),
+                Text('$thirdBarValue', style: smallTextStyleBold),
+              ],
+            ),
+            sizedBox(height * 0.02, width),
+            Text(fourthBar, style: smallTextStyleBold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: width * 0.137,
+                  height: 8,
+                  child: LinearProgressIndicator(
+                    value: fourthBarValue / 100,
+                    color: Colors.grey.shade100,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                  ),
+                ),
+                sizedBox(0.0, width * 0.005),
+                Text('$fourthBarValue', style: smallTextStyleBold),
+              ],
+            ),
+          ],
         ),
       ),
     );

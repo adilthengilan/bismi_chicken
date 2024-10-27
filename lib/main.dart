@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => DashProvider()),
+        ChangeNotifierProvider<DashProvider>(create: (context) => DashProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -31,12 +31,12 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  final List<Widget> pages = [
-    DashBoard(),
-    const Import(),
-    const Feed(),
-    const Export(),
-  ];
+  // final List<Widget> pages = [
+  //   DashBoard(),
+  //   const Import(),
+  //   const Feed(),
+  //   const Export(),
+  // ];
 
   HomePage({super.key});
 
@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
           CustomContainer(
             width: width * 0.15,
             height: height,
-            color: Colors.blue.shade50,
+            color: Colors.white,
             border: Border(right: BorderSide(color: Colors.grey.shade100)),
             child: Column(
               children: [
@@ -62,12 +62,31 @@ class HomePage extends StatelessWidget {
                       height: height * 0.11,
                       width: width,
                       color: Colors.transparent,
-                      child: Center(
-                        child: Text(
-                          'Bismi Super Chicken',
-                          textAlign: TextAlign.center,
-                          style: largeTextStyle,
-                        ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Bismi',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.roboto(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.redAccent,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          Text(
+                            'Super Chicken',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.roboto(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueAccent,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     const Divider(color: Colors.white),
@@ -86,17 +105,41 @@ class HomePage extends StatelessWidget {
                             child: CustomContainer(
                               height: 50,
                               width: width,
-                              color: Colors.blue.shade50,
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: width * 0.01),
                                 child: Row(
                                   children: [
-                                    CircleAvatar(
-                                      radius: height * 0.02,
-                                      backgroundColor: Colors.grey,
-                                      // backgroundImage: const AssetImage('assets/chicken-feed.png'),
-                                    ),
+                                    CustomContainer(
+                                        height: height * 0.04,
+                                        width: width * 0.02,
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: index == 0
+                                            ? Colors.deepPurpleAccent
+                                            : index == 2
+                                                ? Colors.brown
+                                                : index == 1
+                                                    ? Colors.yellow
+                                                    : index == 3
+                                                        ? Colors.greenAccent.shade700
+                                                        : Colors.transparent,
+                                        image: index == 2
+                                            ? DecorationImage(
+                                                image: AssetImage('assets/chicken-feed.png'),
+                                                fit: BoxFit.fill,
+                                              )
+                                            : null,
+                                        child: Icon(
+                                          index == 0
+                                              ? Icons.home_outlined
+                                              : index == 1
+                                                  ? Icons.arrow_downward
+                                                  : index == 3
+                                                      ? Icons.arrow_upward
+                                                      : null,
+                                          color: Colors.white,
+                                        )),
                                     sizedBox(0.0, width * 0.01),
                                     Text(
                                       index == 0
@@ -124,9 +167,10 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          Consumer<DashProvider>(
-            builder: (context, person, child) => pages[person.navigationindex],
-          ),
+          DashBoard(),
+          // Consumer<DashProvider>(
+          //   builder: (context, person, child) => pages[person.navigationindex],
+          // ),
         ],
       ),
     );
@@ -139,24 +183,28 @@ class HomePage extends StatelessWidget {
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 class CustomContainer extends StatelessWidget {
   final double height;
-  final double width;
+  final double? width;
   final Color color;
   final BorderRadius? borderRadius;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
-  final Widget child;
-  final Border? border; // Added border parameter
+  final Widget? child;
+  final Border? border;
+  final BoxShape shape;
+  final DecorationImage? image;
 
   const CustomContainer({
     Key? key,
     required this.height,
-    required this.width,
+    this.width,
     required this.color,
     this.borderRadius,
     this.padding,
     this.margin,
-    required this.child,
-    this.border, // Include the border parameter
+    this.child,
+    this.border,
+    this.shape = BoxShape.rectangle,
+    this.image,
   }) : super(key: key);
 
   @override
@@ -168,8 +216,10 @@ class CustomContainer extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
         color: color,
-        borderRadius: borderRadius,
-        border: border, // Apply the border to BoxDecoration
+        borderRadius: shape == BoxShape.rectangle ? borderRadius : null, // Only use borderRadius if shape is rectangle
+        border: border,
+        shape: shape,
+        image: image,
       ),
       child: child,
     );
@@ -191,9 +241,9 @@ final TextStyle mediumTextStyleBold = GoogleFonts.montserrat(
   fontWeight: FontWeight.w600,
 );
 
-final TextStyle smallTextStyle = GoogleFonts.montserrat(
-  fontSize: 14,
-  fontWeight: FontWeight.normal,
+final TextStyle smallTextStyleBold = GoogleFonts.montserrat(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
 );
 
 Widget sizedBox(height, width) {

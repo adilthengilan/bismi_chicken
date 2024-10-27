@@ -8,6 +8,7 @@ class DashProvider extends ChangeNotifier {
   List<Color> colors = [];
   List<dynamic> farms = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3];
   List listedcolours = [];
+
   void colorslegth() {
     List<int> colourslength = List.generate(farms.length, (index) => index + 1);
     listedcolours = colourslength;
