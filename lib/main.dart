@@ -1,7 +1,9 @@
+import 'package:bismi_chicken/chicks_import.dart';
 import 'package:bismi_chicken/dashboard.dart';
 import 'package:bismi_chicken/export.dart';
 import 'package:bismi_chicken/feeding.dart';
 import 'package:bismi_chicken/view_model.dart/dashboard_provider.dart';
+import 'package:bismi_chicken/view_model.dart/import_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<DashProvider>(create: (context) => DashProvider()),
+        ChangeNotifierProvider<DashProvider>(create: (context) => DashProvider()),
+        ChangeNotifierProvider<ImportProvider>(create: (context) => ImportProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -38,6 +42,9 @@ class HomePage extends StatelessWidget {
     // const Import(),
     const Feed(),
     const Export(),
+    ChicksImport(),
+    Feed(),
+    Export(),
   ];
 
   HomePage({super.key});
@@ -48,6 +55,7 @@ class HomePage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     final provider = Provider.of<DashProvider>(context, listen: false);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Row(
         children: [
           CustomContainer(
