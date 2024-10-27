@@ -1,4 +1,6 @@
 import 'package:bismi_chicken/dashboard.dart';
+import 'package:bismi_chicken/export.dart';
+import 'package:bismi_chicken/feeding.dart';
 import 'package:bismi_chicken/view_model.dart/dashboard_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,12 +33,12 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  // final List<Widget> pages = [
-  //   DashBoard(),
-  //   const Import(),
-  //   const Feed(),
-  //   const Export(),
-  // ];
+  final List<Widget> pages = [
+    DashBoard(),
+    // const Import(),
+    const Feed(),
+    const Export(),
+  ];
 
   HomePage({super.key});
 
